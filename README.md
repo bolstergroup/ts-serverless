@@ -4,26 +4,6 @@ Heavily inspired by Postlights Serverless Starter & modified to work with Typesc
 
 Note: Currently, this starter kit specifically targets AWS.
 
-## Install
-
-```bash
-# If you don't already have the serverless cli installed, do that
-yarn global add serverless
-
-# Use the serverless cli to install this repo
-serverless install --url https://github.com/postlight/serverless-babel-starter
-
-# cd into project and set it up
-cd serverless-babel-starter
-
-# The bootstrap command renames the project folder and project in package.json and serverless.yml
-# and initializes a git repo
-yarn bootstrap your-project-name
-
-# Install dependencies
-yarn install
-```
-
 ## Development
 
 Creating and deploying a new function takes two steps, which you can see in action with this repo's default Hello World function (if you're already familiar with Serverless, you're probably familiar with these steps).
