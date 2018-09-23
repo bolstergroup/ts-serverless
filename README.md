@@ -1,6 +1,6 @@
 # WIP.
 
-Postlight's Modern Serverless Starter Kit adds a light layer on top of the Serverless framework, giving you the latest in modern JavaScript (TypeScript via Webpack, testing with Jest, linting with TSLint, and formatting with Prettier), the ease and power of Serverless, and a few handy helpers (like functions for handling warm functions and response helpers).
+Heavily inspired by Postlights Serverless Starter & modified to work with Typescript + optimized for Bolsters workflow.
 
 Note: Currently, this starter kit specifically targets AWS.
 
