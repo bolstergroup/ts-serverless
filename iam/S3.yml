@@ -1,0 +1,15 @@
+# Allow read access to the Deployment bucket
+- Effect: 'Allow'
+  Action:
+    - 's3:ListBucket'
+  Resource: { 'Fn::Join': ['', ['arn:aws:s3:::', { 'Ref': 'ServerlessDeploymentBucket' }]] }
+
+# All putting objects into the Deployment bucket.
+- Effect: 'Allow'
+  Action:
+    - 's3:PutObject'
+  Resource:
+    Fn::Join:
+      - ''
+      - - 'arn:aws:s3:::'
+        - 'Ref': 'ServerlessDeploymentBucket'

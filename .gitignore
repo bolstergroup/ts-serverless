@@ -1,5 +1,7 @@
+dist
 node_modules
-.env
 .webpack
 .serverless
 .env*
+yarn-error.log
+yarn.lock

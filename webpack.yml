@@ -1,0 +1,4 @@
+packager: 'yarn'
+includeModules:
+  forceExclude:
+    - aws-sdk
