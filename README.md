@@ -1,8 +1,6 @@
-Postlight's Modern Serverless Starter Kit adds a light layer on top of the Serverless framework, giving you the latest in modern JavaScript (ES6 via Webpack + Babel, testing with Jest, linting with ESLint, and formatting with Prettier), the ease and power of Serverless, and a few handy helpers (like functions for handling warm functions and response helpers).
+# WIP.
 
-Once installed, you can create and deploy functions with the latest ES6 features in minutes, with linting and formatting baked in.
-
-Read more about it in [this handy introduction](https://trackchanges.postlight.com/introducing-postlights-modern-serverless-starter-kit-53ebfbf4459f).
+Postlight's Modern Serverless Starter Kit adds a light layer on top of the Serverless framework, giving you the latest in modern JavaScript (TypeScript via Webpack, testing with Jest, linting with TSLint, and formatting with Prettier), the ease and power of Serverless, and a few handy helpers (like functions for handling warm functions and response helpers).
 
 Note: Currently, this starter kit specifically targets AWS.
 
@@ -20,7 +18,7 @@ cd serverless-babel-starter
 
 # The bootstrap command renames the project folder and project in package.json and serverless.yml
 # and initializes a git repo
-yarn bootstrap your-project-name 
+yarn bootstrap your-project-name
 
 # Install dependencies
 yarn install
@@ -48,13 +46,13 @@ functions:
           enabled: true
 ```
 
-Ignoring the scheduling event, you can see here that we're setting up a function named `hello` with a handler at `src/hello.js` (the `.default` piece is just indicating that the function to run will be the default export from that file). The `http` event says that this function will run when an http event is triggered (on AWS, this happens via API Gateway).
+Ignoring the scheduling event, you can see here that we're setting up a function named `hello` with a handler at `src/hello.ts` (the `.default` piece is just indicating that the function to run will be the default export from that file). The `http` event says that this function will run when an http event is triggered (on AWS, this happens via API Gateway).
 
 #### 2. Create your function
 
 This starter kit's Hello World function (which you will of course get rid of) can be found at [`./src/hello.js`](./src/hello.js). There you can see a basic function that's intended to work in conjunction with API Gateway (i.e., it is web-accessible). Like most Serverless functions, the `hello` function accepts an event, context, and callback. When your function is completed, you execute the callback with your response. (This is all basic Serverless; if you've never used it, be sure to read through [their docs](https://serverless.com/framework/docs/).
 
-------
+---
 
 You can develop and test your lambda functions locally in a few different ways.
 
@@ -88,7 +86,6 @@ yarn test
 When you add a new function to your serverless config, you don't need to also add it as a new entry
 for Webpack. The `serverless-webpack` plugin allows us to follow a simple convention in our `serverless.yml`
 file which is uses to automatically resolve your function handlers to the appropriate file:
-
 
 ```yaml
 functions:
@@ -128,15 +125,15 @@ Your handler function can then handle this event like so:
 const myFunc = (event, context, callback) => {
   // Detect the keep-alive ping from CloudWatch and exit early. This keeps our
   // lambda function running hot.
-  if (event.source === 'aws.events') { // aws.events is the source for Scheduled events
-    return callback(null, 'pinged');
+  if (event.source === 'aws.events') {
+    // aws.events is the source for Scheduled events
+    return callback(null, 'pinged')
   }
 
   // ... the rest of your function
 }
 
-export default myFunc;
-
+export default myFunc
 ```
 
 Copying and pasting the above can be tedious, so we've added a higher order function to wrap your run-warm functions. You still need to config the ping in your `serverless.yml` file; then your function should look like this:
@@ -148,7 +145,7 @@ const myFunc = (event, context, callback) => {
   // Your function logic
 }
 
-export default runWarm(myFunc);
+export default runWarm(myFunc)
 ```
 
 ## Deploy
