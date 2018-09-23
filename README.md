@@ -126,18 +126,7 @@ export default runWarm(myFunc)
 Assuming you've already set up your default AWS credentials (or have set a different AWS profile via [the profile field](serverless.yml#L25)):
 
 ```bash
-yarn deploy
-```
-
-`yarn deploy` will deploy to "dev" environment. You can deploy to `stage` or `production`
-with:
-
-```bash
-yarn deploy:stage
-
-# -- or --
-
-yarn deploy:production
+sls deploy --stage $STAGE --service $SERVICE
 ```
 
 After you've deployed, the output of the deploy script will give you the API endpoint
