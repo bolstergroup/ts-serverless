@@ -9,7 +9,7 @@
         "precommit": "lint-staged",
         "serve": "serverless offline start",
         "tail:hello": "serverless logs --function hello --tail",
-        "test": "jest --config jestconfig.json",
+        "test": "jest --config jest.config.js",
         "watch:hello": "serverless invoke local --watch --function hello --path fixtures/event.json",
         "watch:warm": "serverless invoke local --watch --function hello --path fixtures/scheduled.json"
     },

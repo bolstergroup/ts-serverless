@@ -1,44 +1,48 @@
 function lambdaResponse({ json, statusCode, allowCORS = false }) {
-  const response = {
+  const response: {
+    statusCode: string
+    body: string
+    headers?: {}
+  } = {
     statusCode,
-    body: JSON.stringify(json),
-  };
+    body: JSON.stringify(json)
+  }
 
   if (allowCORS) {
     response.headers = {
-      'Access-Control-Allow-Origin': '*',
-    };
+      'Access-Control-Allow-Origin': '*'
+    }
   }
 
-  return response;
+  return response
 }
 
 export function errorResponse(json) {
   return lambdaResponse({
     json,
-    statusCode: 500,
-  });
+    statusCode: 500
+  })
 }
 
 export function corsErrorResponse(json) {
   return lambdaResponse({
     json,
     statusCode: 500,
-    allowCORS: true,
-  });
+    allowCORS: true
+  })
 }
 
 export function successResponse(json) {
   return lambdaResponse({
     json,
-    statusCode: 200,
-  });
+    statusCode: 200
+  })
 }
 
 export function corsSuccessResponse(json) {
   return lambdaResponse({
     json,
     statusCode: 200,
-    allowCORS: true,
-  });
+    allowCORS: true
+  })
 }

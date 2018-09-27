@@ -1,3 +1,3 @@
 import { successResponse, runWarm } from './utils'
 
-export default runWarm((request, context, callback) => callback(null, successResponse('pong', false)))
+export default runWarm((request, context, callback) => callback(null, successResponse('pong')))

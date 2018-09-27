@@ -5,3 +5,4 @@ node_modules
 .env*
 yarn-error.log
 yarn.lock
+**/*/__snapshots__
