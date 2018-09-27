@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ping executes as expected 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      null,
+      Object {
+        "body": "\\"pong\\"",
+        "statusCode": 200,
+      },
+    ],
+  ],
+}
+`;
