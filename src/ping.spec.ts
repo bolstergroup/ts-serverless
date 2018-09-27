@@ -1,7 +1,7 @@
 import ping from './ping'
 
 describe('ping', () => {
-  it('executes as expected', () => {
+  it('Given three arguments, executes', () => {
     const cb = jest.fn()
     ping({}, {}, cb)
     expect(cb).toBeCalled()

@@ -39,7 +39,8 @@
     "dependencies": {},
     "lint-staged": {
         "src/**/*.js": [
-            "yarn lint -- --fix",
+            "yarn lint --fix",
+            "yarn test",
             "prettier --write --single-quote --trailing-comma es5",
             "git add"
         ]
