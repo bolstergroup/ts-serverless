@@ -1,6 +1,6 @@
-# WIP.
+# Serverless Framework w/ TypeScript, Jest & Webpack + sane defaults.
 
-Heavily inspired by Postlights Serverless Starter & modified to work with Typescript + optimized for Bolsters workflow.
+This framework has been developed to provide a solid starting point for 'serverless' NodeJS projects. Big thanks to Postlight NY for inspiring this project with their [Serverless Babel Starter](https://github.com/postlight/serverless-babel-starter).
 
 Note: Currently, this starter kit specifically targets AWS.
 
@@ -13,12 +13,13 @@ Creating and deploying a new function takes two steps, which you can see in acti
 In the functions section of [`./serverless.yml`](./serverless.yml), you have to add your new function like so:
 
 ```yaml
+# Declare REST endpoints, or event (SNS,SQS,S3 etc.) handlers here.
 functions:
-  hello:
-    handler: src/hello.default
+  ping:
+    handler: src/ping.default
     events:
       - http:
-          path: hello
+          path: ping
           method: get
       # Ping every 5 minutes to avoid cold starts
       - schedule:
@@ -26,13 +27,22 @@ functions:
           enabled: true
 ```
 
-Ignoring the scheduling event, you can see here that we're setting up a function named `hello` with a handler at `src/hello.ts` (the `.default` piece is just indicating that the function to run will be the default export from that file). The `http` event says that this function will run when an http event is triggered (on AWS, this happens via API Gateway).
+This is a single function declaration that creates a GET endpoint at `/ping`, which runs the default export from [`./src/ping.ts`](./src/ping.ts).
+
+Event - `http` creates the an AWS API Gateway endpoint.
+Event - `schedule` pings the function once every 5 minutes in order to prevent cold starts.
+
 
 #### 2. Create your function
 
-This starter kit's Hello World function is a ping/pong (which you will of course get rid of). Found at [`./src/ping.ts`](./src/ping.ts). There you can see a basic function that's intended to work in conjunction with API Gateway (i.e., it is web-accessible). Like most Serverless functions, the `ping` function accepts an event, context, and callback. 
+This starter kit's Hello World function is a ping/pong (which you will of course get rid of). Found at [`./src/ping.ts`](./src/ping.ts). There you can see a basic function that's intended to work in conjunction with API Gateway (i.e., it is web-accessible). 
 
-When your function is completed, you execute the callback with your response. (This is all basic Serverless; if you've never used it, be sure to read through [their docs](https://serverless.com/framework/docs/).
+Like most Serverless functions, the `ping` function accepts an: 
+- event `Object`
+- context `Object`
+- callback `Function`
+
+When your function is completed, you execute the callback with your response. (If you've never used Serverless, have a read through [their docs](https://serverless.com/framework/docs/).
 
 ---
 
@@ -62,15 +72,15 @@ file which is uses to automatically resolve your function handlers to the approp
 
 ```yaml
 functions:
-  hello:
-    handler: src/hello.default
+  ping:
+    handler: src/ping.default
 ```
 
 As you can see, the path to the file with the function has to explicitly say where the handler
 file is. (If your function weren't the default export of that file, you'd do something like:
-`src/hello.namedExport` instead.)
+`src/ping.notDefault` instead.)
 
-### Keep your Lambda functions warm
+### Run your Lambda functions 🔥
 
 Lambda functions will go "cold" if they haven't been invoked for a certain period of time (estimates vary, and AWS doesn't offer a clear answer). From the [Serverless blog](https://serverless.com/blog/keep-your-lambdas-warm/):
 
@@ -80,36 +90,15 @@ A frequently running function won't have this problem, but you can keep your fun
 
 ```yaml
 functions:
-  myFunc:
-    handler: src/myFunc.default
-    timeout: 10
-    memorySize: 256
+  ping:
+    handler: src/ping.default
     events:
-      # ...other config happening up here and then...
       # Ping every 5 minutes to avoid cold starts
       - schedule:
           rate: rate(5 minutes)
           enabled: true
 ```
-
-Your handler function can then handle this event like so:
-
-```javascript
-const myFunc = (event, context, callback) => {
-  // Detect the keep-alive ping from CloudWatch and exit early. This keeps our
-  // lambda function running hot.
-  if (event.source === 'aws.events') {
-    // aws.events is the source for Scheduled events
-    return callback(null, 'pinged')
-  }
-
-  // ... the rest of your function
-}
-
-export default myFunc
-```
-
-Copying and pasting the above can be tedious, so we've added a higher order function to wrap your run-warm functions. You still need to config the ping in your `serverless.yml` file; then your function should look like this:
+Once you have configured the ping in your `serverless.yml` file; You can use the runWarm HOF to wrap your function.
 
 ```javascript
 import runWarm from './utils'
