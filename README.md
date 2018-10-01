@@ -1,4 +1,4 @@
-# Serverless Framework w/ TypeScript, Jest & Webpack + sane defaults.
+# Serverless Framework w/ TypeScript, Jest & Webpack
 
 This framework has been developed to provide a solid starting point for 'serverless' NodeJS projects. Big thanks to Postlight NY for inspiring this project with their [Serverless Babel Starter](https://github.com/postlight/serverless-babel-starter).
 
