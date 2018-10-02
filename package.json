@@ -7,11 +7,12 @@
     "scripts": {
         "lint": "eslint ./src",
         "precommit": "lint-staged",
-        "serve": "serverless offline start",
+        "serve": "serverless offline start --service ts-serverless",
         "tail:hello": "serverless logs --function hello --tail",
         "test": "jest --config jest.config.js",
         "watch:hello": "serverless invoke local --watch --function hello --path fixtures/event.json",
-        "watch:warm": "serverless invoke local --watch --function hello --path fixtures/scheduled.json"
+        "watch:warm": "serverless invoke local --watch --function hello --path fixtures/scheduled.json",
+        "dev": "ENV_FILE=.env.local NODE_ENV=development node server.js"
     },
     "devDependencies": {
         "@babel/core": "^7.1.0",
@@ -20,6 +21,7 @@
         "@types/expect": "^1.20.3",
         "@types/jest": "^23.3.2",
         "@types/node": "^10.11.0",
+        "awesome-typescript-loader": "^5.2.1",
         "babel-runtime": "^6.22.0",
         "husky": "^0.14.3",
         "jest": "^22.0.4",
@@ -36,7 +38,16 @@
         "webpack": "^4",
         "webpack-node-externals": "^1"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@zeit/next-sass": "^1.0.1",
+        "aws-serverless-express": "^3.3.5",
+        "dotenv": "^6.0.0",
+        "express": "^4.16.3",
+        "next": "^7.0.1",
+        "node-sass": "^4.9.3",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2"
+    },
     "lint-staged": {
         "src/**/*.ts": [
             "yarn lint --fix",

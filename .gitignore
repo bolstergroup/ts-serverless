@@ -6,3 +6,7 @@ node_modules
 yarn-error.log
 yarn.lock
 **/__snapshots__
+
+# next.js build output
+.next
+.sass-cache/
